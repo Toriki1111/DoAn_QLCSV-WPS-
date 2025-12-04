@@ -57,6 +57,7 @@ namespace DoAn_QLCSV
         {
             lblPageTitle.Text = "← Tổng quan";
             btnHome.Tag = "Active";
+            MainContent.Content = null;
         }
 
         private void btnProfile_Click(object sender, RoutedEventArgs e)
@@ -64,14 +65,12 @@ namespace DoAn_QLCSV
             lblPageTitle.Text = "← Hồ sơ cá nhân";
             btnHome.Tag = null;
             var profile = new StudentProfile();
-            // Allow student to edit: Email, Phone, Birthdate, Address, Company, Position
             profile.AllowEditEmail = true;
             profile.AllowEditPhone = true;
             profile.AllowEditBirthdate = true;
             profile.AllowEditAddress = true;
             profile.AllowEditCompany = true;
             profile.AllowEditPosition = true;
-
             MainContent.Content = profile;
         }
 
@@ -79,30 +78,41 @@ namespace DoAn_QLCSV
         {
             lblPageTitle.Text = "← Lịch sử cập nhật";
             btnHome.Tag = null;
+            MainContent.Content = null;
+            MessageBox.Show("Tính năng Lịch sử cập nhật đang phát triển.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void btnEvents_Click(object sender, RoutedEventArgs e)
         {
             lblPageTitle.Text = "← Sự kiện sắp tới";
             btnHome.Tag = null;
+            var events = new UpCommingEvents();
+            MainContent.Content = events;
         }
 
         private void btnMyEvents_Click(object sender, RoutedEventArgs e)
         {
             lblPageTitle.Text = "← Đăng ký của tôi";
             btnHome.Tag = null;
+            var signUp = new Student_SignUp();
+            signUp.Owner = this;
+            signUp.ShowDialog();
         }
 
         private void btnNetwork_Click(object sender, RoutedEventArgs e)
         {
             lblPageTitle.Text = "← Tìm kiếm Alumni";
             btnHome.Tag = null;
+            var connections = new Connections();
+            MainContent.Content = connections;
         }
 
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
             lblPageTitle.Text = "← Cài đặt";
             btnHome.Tag = null;
+            MainContent.Content = null;
+            MessageBox.Show("Tính năng Cài đặt đang phát triển.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void btnChangePass_Click(object sender, RoutedEventArgs e)
