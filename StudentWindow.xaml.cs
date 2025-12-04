@@ -1,88 +1,122 @@
 ﻿using System.Windows;
-using System.Windows.Controls; // Cần để dùng UserControl
-using System.Windows.Input;    // Cần để xử lý kéo thả cửa sổ
+using System.Windows.Input;
 
 namespace DoAn_QLCSV
 {
     public partial class StudentWindow : Window
     {
+        private readonly Thickness _normalBorderMargin = new Thickness(40);
+        private readonly CornerRadius _normalCornerRadius = new CornerRadius(15);
+
         public StudentWindow()
         {
             InitializeComponent();
-
-            // Mặc định load trang Hồ sơ
-            // Nếu bạn chưa tạo StudentProfile thì comment dòng dưới lại
-            // LoadView(new StudentProfile(), "Hồ sơ cá nhân"); 
         }
 
-        // ============================================================
-        // 1. XỬ LÝ ĐIỀU HƯỚNG MENU
-        // ============================================================
-
-        // Hàm hỗ trợ nạp UserControl
-        private void LoadView(UserControl view, string title)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = view;
-            if (lblPageTitle != null) // Kiểm tra null để tránh lỗi khi khởi tạo
-            {
-                lblPageTitle.Text = title;
-            }
+            // Show overview immediately with Home button active
+            lblPageTitle.Text = "← Tổng quan";
+            btnHome.Tag = "Active";
         }
-
-        // Menu: Hồ sơ của tôi
-        private void btnProfile_Click(object sender, RoutedEventArgs e)
-        {
-            // LoadView(new StudentProfile(), "Hồ sơ cá nhân");
-            MessageBox.Show("Đang tải hồ sơ...", "Thông báo");
-        }
-
-        // Menu: Sự kiện sắp tới (ĐÃ SỬA TÊN HÀM Ở ĐÂY CHO KHỚP)
-        private void btnEvents_Click(object sender, RoutedEventArgs e)
-        {
-            // LoadView(new EventList(), "Sự kiện & Tin tức");
-            MessageBox.Show("Đang tải sự kiện...", "Thông báo");
-        }
-
-        // Nút Đăng xuất
-        private void btnLogout_Click(object sender, RoutedEventArgs e)
-        {
-            Login login = new Login();
-            login.Show();
-            this.Close();
-        }
-
-        // ============================================================
-        // 2. XỬ LÝ CỬA SỔ (Tắt, Mở, Kéo thả)
-        // ============================================================
 
         private void Header_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-        }
-
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            WindowState = WindowState.Minimized;
         }
 
         private void btnMaximize_Click(object sender, RoutedEventArgs e)
         {
-            if (this.WindowState == WindowState.Normal)
+            if (WindowState == WindowState.Normal)
             {
-                this.WindowState = WindowState.Maximized;
+                WindowState = WindowState.Maximized;
                 MainBorder.CornerRadius = new CornerRadius(0);
+                MainBorder.Margin = new Thickness(0);
             }
             else
             {
-                this.WindowState = WindowState.Normal;
-                MainBorder.CornerRadius = new CornerRadius(15);
+                WindowState = WindowState.Normal;
+                MainBorder.CornerRadius = _normalCornerRadius;
+                MainBorder.Margin = _normalBorderMargin;
             }
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        // Navigation handlers
+        private void btnHome_Click(object sender, RoutedEventArgs e)
+        {
+            lblPageTitle.Text = "← Tổng quan";
+            btnHome.Tag = "Active";
+        }
+
+        private void btnProfile_Click(object sender, RoutedEventArgs e)
+        {
+            lblPageTitle.Text = "← Hồ sơ cá nhân";
+            btnHome.Tag = null;
+            var profile = new StudentProfile();
+            // Allow student to edit: Email, Phone, Birthdate, Address, Company, Position
+            profile.AllowEditEmail = true;
+            profile.AllowEditPhone = true;
+            profile.AllowEditBirthdate = true;
+            profile.AllowEditAddress = true;
+            profile.AllowEditCompany = true;
+            profile.AllowEditPosition = true;
+
+            MainContent.Content = profile;
+        }
+
+        private void btnHistory_Click(object sender, RoutedEventArgs e)
+        {
+            lblPageTitle.Text = "← Lịch sử cập nhật";
+            btnHome.Tag = null;
+        }
+
+        private void btnEvents_Click(object sender, RoutedEventArgs e)
+        {
+            lblPageTitle.Text = "← Sự kiện sắp tới";
+            btnHome.Tag = null;
+        }
+
+        private void btnMyEvents_Click(object sender, RoutedEventArgs e)
+        {
+            lblPageTitle.Text = "← Đăng ký của tôi";
+            btnHome.Tag = null;
+        }
+
+        private void btnNetwork_Click(object sender, RoutedEventArgs e)
+        {
+            lblPageTitle.Text = "← Tìm kiếm Alumni";
+            btnHome.Tag = null;
+        }
+
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            lblPageTitle.Text = "← Cài đặt";
+            btnHome.Tag = null;
+        }
+
+        private void btnChangePass_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new ChangePasswordWindow();
+            dlg.Owner = this;
+            dlg.ShowDialog();
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            var login = new Login();
+            login.Show();
+            Close();
         }
     }
 }

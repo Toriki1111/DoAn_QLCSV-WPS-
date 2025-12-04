@@ -90,13 +90,13 @@ namespace DoAn_QLCSV
         // Menu: Thống Kê (Chưa làm)
         private void btnThongKe_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Chức năng Thống kê đang phát triển!", "Thông báo");
+            LoadView(new ThongKe(), "Danh Sách Thống Kê");
         }
 
         // Menu: Sự Kiện (Chưa làm)
         private void btnSuKien_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Chức năng Sự kiện đang phát triển!", "Thông báo");
+            LoadView(new SuKien(), "Danh Sách Sự Kiện");
         }
 
         private void btnChangePass_Click(object sender, RoutedEventArgs e)

@@ -95,7 +95,7 @@
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0" CornerRadius="20,0,0,20" Background="#b3aaeb" ClipToBounds="True">
+            <Border Grid.Column="0" CornerRadius="20,0,0,20" Background="#6A66EB" ClipToBounds="True">
                 <Viewbox Stretch="UniformToFill">
                     <Grid Width="350" Height="500">
 
@@ -109,7 +109,7 @@
                         </StackPanel>
 
                         <Canvas VerticalAlignment="Top" Margin="0,50,0,0" Height="20">
-                            <TextBlock Text="Thông Báo: Đang bảo trì hệ thống từ 12h-13h..." FontSize="18" Foreground="#FFCCBC" FontWeight="Bold" Opacity="0.9" Canvas.Left="-134" Canvas.Top="9" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <TextBlock Text="Thông Báo: WTF" FontSize="18" Foreground="#FFCCBC" FontWeight="Bold" Opacity="0.9" Canvas.Left="-134" Canvas.Top="9" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <TextBlock.RenderTransform>
                                     <TranslateTransform x:Name="ThongBao" X="600"/>
                                 </TextBlock.RenderTransform>

@@ -177,7 +177,7 @@
                 <Button Content="Làm mới" Style="{StaticResource BtnFuncStyle}" Background="#607D8B" Click="btnRefresh_Click"/>
                 <Button Content="Thêm" Style="{StaticResource BtnFuncStyle}" Background="#4CAF50" Click="btnAdd_Click"/>
                 <Button Content="💾 Lưu Sửa" Style="{StaticResource BtnFuncStyle}" Background="#FF9800" Click="btnUpdate_Click"/>
-                <Button Content="🗑" Style="{StaticResource BtnFuncStyle}" Background="#F44336" Click="btnDelete_Click"/>
+                <Button Content="     🗑     " Style="{StaticResource BtnFuncStyle}" Background="#F44336" Click="btnDelete_Click"/>
             </StackPanel>
         </Grid>
 
