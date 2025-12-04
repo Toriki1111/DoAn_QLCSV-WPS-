@@ -1,0 +1,133 @@
+﻿<Window x:Class="DoAn_QLCSV.StudentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Cổng thông tin Alumni" Height="700" Width="1200"
+        WindowStartupLocation="CenterScreen" WindowStyle="None"
+        AllowsTransparency="True" Background="Transparent" ResizeMode="CanResize">
+
+    <Window.Resources>
+        <Style x:Key="MenuBtnStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#DDD"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="20,15"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#333"/>
+                    <Setter Property="Foreground" Value="#FFC107"/>
+                </Trigger>
+                <Trigger Property="Tag" Value="Active">
+                    <Setter Property="Background" Value="#FFC107"/>
+                    <Setter Property="Foreground" Value="#1E1E1E"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="WinBtnStyle" TargetType="Button">
+            <Setter Property="Width" Value="35"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#AAA"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#444"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Border x:Name="MainBorder" Background="#202020" CornerRadius="15" BorderBrush="#444" BorderThickness="1">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="#181818" CornerRadius="15,0,0,15">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="25,40,0,40">
+                        <Border Width="50" Height="50" CornerRadius="25" Background="#FFC107">
+                            <TextBlock Text="SV" FontWeight="Bold" Foreground="#1E1E1E" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                        </Border>
+                        <StackPanel Margin="15,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="ALUMNI" FontSize="20" FontWeight="Bold" Foreground="White"/>
+                            <TextBlock Text="Student Portal" FontSize="12" Foreground="#888"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <TextBlock Text="CÁ NHÂN" Foreground="#555" FontSize="12" FontWeight="Bold" Margin="20,0,0,10"/>
+
+                    <Button Style="{StaticResource MenuBtnStyle}" Content="👤  Hồ sơ của tôi" Click="btnProfile_Click"/>
+                    <Button Style="{StaticResource MenuBtnStyle}" Content="📅  Sự kiện sắp tới" Click="btnEvents_Click"/>
+
+                    <TextBlock Text="HỆ THỐNG" Foreground="#555" FontSize="12" FontWeight="Bold" Margin="20,20,0,10"/>
+
+                    <Button Style="{StaticResource MenuBtnStyle}" Content="🚪  Đăng xuất" Foreground="#FF5252" Click="btnLogout_Click"/>
+                </StackPanel>
+            </Border>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" MouseDown="Header_MouseDown" Background="Transparent" BorderBrush="#333" BorderThickness="0,0,0,1">
+                    <Grid>
+                        <TextBlock x:Name="lblPageTitle" Text="Xin chào, Cựu sinh viên!" VerticalAlignment="Center" Margin="30,0,0,0" Foreground="#DDD" FontSize="16" FontWeight="SemiBold"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0">
+                            <Button Content="─" Style="{StaticResource WinBtnStyle}" Click="btnMinimize_Click"/>
+                            <Button Content="☐" Style="{StaticResource WinBtnStyle}" Click="btnMaximize_Click"/>
+                            <Button Content="✕" Click="btnClose_Click">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource WinBtnStyle}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#D32F2F"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <ContentControl Grid.Row="1" x:Name="MainContent" Margin="20">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Text="👋" FontSize="50" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Chào mừng quay trở lại!" FontSize="24" FontWeight="Bold" Foreground="#FFC107" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                            <TextBlock Text="Chọn mục bên trái để xem thông tin." Foreground="#AAA" FontSize="14" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                        </StackPanel> 
+                    </Grid>
+                </ContentControl>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
