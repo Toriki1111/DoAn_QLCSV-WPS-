@@ -1,37 +1,31 @@
 ﻿<UserControl x:Class="DoAn_QLCSV.StudentList"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
              d:DesignHeight="750" d:DesignWidth="1100"
              Background="Transparent">
 
     <UserControl.Resources>
-        <!-- Style TextBox -->
         <Style TargetType="TextBox">
             <Setter Property="Padding" Value="5"/>
-            <Setter Property="FontSize" Value="13"/>
             <Setter Property="Background" Value="#333"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="#555"/>
             <Setter Property="Margin" Value="0,0,0,10"/>
         </Style>
-        <!-- Style Label -->
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="#BBB"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Margin" Value="0,0,0,3"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
-        <!-- Style Button -->
         <Style x:Key="BtnFuncStyle" TargetType="Button">
             <Setter Property="Padding" Value="15,8"/>
             <Setter Property="Margin" Value="5,0"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -47,76 +41,55 @@
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Form Chi tiết (Master Detail) -->
             <RowDefinition Height="Auto"/>
-            <!-- Thanh công cụ -->
             <RowDefinition Height="*"/>
-            <!-- Bảng dữ liệu -->
             <RowDefinition Height="Auto"/>
-            <!-- Footer -->
         </Grid.RowDefinitions>
 
-        <!-- 1. FORM CHI TIẾT (FULL DATA) -->
         <Border Grid.Row="0" Background="#252526" CornerRadius="8" Padding="15" Margin="0,0,0,15">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
-                    <!-- Cột 1: Thông tin cơ bản -->
                     <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="1*"/>
-                    <!-- Cột 2: Học vấn & Công việc -->
                     <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="1*"/>
-                    <!-- Cột 3: Liên hệ & MXH -->
                 </Grid.ColumnDefinitions>
 
-                <!-- CỘT 1: CƠ BẢN -->
                 <StackPanel Grid.Column="0">
                     <TextBlock Text="Mã Sinh Viên (Student ID):" Foreground="#FFC107"/>
-                    <TextBox x:Name="txtMaSV" IsReadOnly="True" Background="#222" Foreground="#888" ToolTip="Không thể sửa mã SV"/>
+                    <TextBox x:Name="txtMaSV" IsReadOnly="True" Background="#222" Foreground="#888"/>
 
                     <TextBlock Text="Họ và Tên (Full Name):"/>
                     <TextBox x:Name="txtHoTen"/>
 
-                    <TextBlock Text="Ngày sinh:"/>
-                    <DatePicker x:Name="dpNgaySinh" Height="30" Margin="0,0,0,10" Background="#333"/>
+                    <TextBlock Text="Email:"/>
+                    <TextBox x:Name="txtEmail"/>
 
-                    <TextBlock Text="Tiểu sử ngắn (Bio):"/>
-                    <TextBox x:Name="txtBio" Height="55" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                    <TextBlock Text="Tiểu sử (Bio):"/>
+                    <TextBox x:Name="txtBio" Height="60" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
                 </StackPanel>
 
-                <!-- CỘT 2: HỌC VẤN & CÔNG VIỆC -->
                 <StackPanel Grid.Column="2">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="10"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0">
-                            <TextBlock Text="Niên khóa (Batch):"/>
-                            <TextBox x:Name="txtNienKhoa"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="2">
-                            <TextBlock Text="Năm Tốt Nghiệp:"/>
-                            <TextBox x:Name="txtNamTotNghiep"/>
-                        </StackPanel>
-                    </Grid>
+                    <TextBlock Text="Khoa (Faculty):"/>
+                    <TextBox x:Name="txtFaculty"/>
 
-                    <TextBlock Text="Ngành học (Major):"/>
+                    <TextBlock Text="Ngành (Major):"/>
                     <TextBox x:Name="txtNganh"/>
 
-                    <TextBlock Text="Vị trí hiện tại (Current Position):"/>
-                    <TextBox x:Name="txtViTri"/>
+                    <TextBlock Text="Năm Tốt Nghiệp:"/>
+                    <TextBox x:Name="txtNamTotNghiep"/>
 
                     <TextBlock Text="Công ty (Company):"/>
                     <TextBox x:Name="txtCongTy"/>
+
+                    <TextBlock Text="Vị trí (Position):"/>
+                    <TextBox x:Name="txtViTri"/>
                 </StackPanel>
 
-                <!-- CỘT 3: LIÊN HỆ & MXH -->
                 <StackPanel Grid.Column="4">
-                    <TextBlock Text="Email:"/>
-                    <TextBox x:Name="txtEmail"/>
+                    <TextBlock Text="Lĩnh vực hoạt động (Industry):"/>
+                    <TextBox x:Name="txtIndustry"/>
 
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -143,96 +116,42 @@
             </Grid>
         </Border>
 
-        <!-- 2. THANH CÔNG CỤ -->
         <Grid Grid.Row="1" Margin="0,0,0,15">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Tìm kiếm -->
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock Text="DANH SÁCH CỰU SINH VIÊN" FontSize="20" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="0,0,20,0"/>
-                <Border CornerRadius="4" Background="#333" BorderBrush="#555" BorderThickness="1" Width="300" Height="35">
-                    <Grid>
-                        <TextBlock Text="🔍 Tìm theo Tên, Công ty, Ngành..." Foreground="#666" VerticalAlignment="Center" Margin="10,0,0,0" IsHitTestVisible="False">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=txtSearch}" Value="">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                        <TextBox x:Name="txtSearch" Background="Transparent" BorderThickness="0" Foreground="White" VerticalContentAlignment="Center" Margin="5,0" TextChanged="txtSearch_TextChanged"/>
-                    </Grid>
-                </Border>
+                <TextBox x:Name="txtSearch" Width="300" Height="35" Margin="0" VerticalContentAlignment="Center" TextChanged="txtSearch_TextChanged"/>
             </StackPanel>
 
-            <!-- Nút chức năng -->
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <Button Content="Làm mới" Style="{StaticResource BtnFuncStyle}" Background="#607D8B" Click="btnRefresh_Click"/>
-                <Button Content="Thêm" Style="{StaticResource BtnFuncStyle}" Background="#4CAF50" Click="btnAdd_Click"/>
-                <Button Content="💾 Lưu Sửa" Style="{StaticResource BtnFuncStyle}" Background="#FF9800" Click="btnUpdate_Click"/>
-                <Button Content="     🗑     " Style="{StaticResource BtnFuncStyle}" Background="#F44336" Click="btnDelete_Click"/>
+                <Button Content="Thêm Mới" Style="{StaticResource BtnFuncStyle}" Background="#4CAF50" Click="btnAdd_Click"/>
+                <Button Content="Lưu Sửa" Style="{StaticResource BtnFuncStyle}" Background="#FF9800" Click="btnUpdate_Click"/>
+                <Button Content="Xóa" Style="{StaticResource BtnFuncStyle}" Background="#F44336" Click="btnDelete_Click"/>
             </StackPanel>
         </Grid>
 
-        <!-- 3. BẢNG DỮ LIỆU (DATAGRID) -->
-        <DataGrid Grid.Row="2" x:Name="dgSinhVien" 
-                  AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single"
-                  Background="#2D2D30" RowBackground="#2D2D30" Foreground="#EEE" 
-                  BorderBrush="#444" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#444"
-                  RowHeight="35" HeadersVisibility="Column"
-                  SelectionChanged="dgSinhVien_SelectionChanged"
-                  
-                  ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  ScrollViewer.HorizontalScrollBarVisibility="Auto">
-            <DataGrid.Resources>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Background" Value="#1E1E1E"/>
-                    <Setter Property="Foreground" Value="#AAA"/>
-                    <Setter Property="Padding" Value="10"/>
-                    <Setter Property="FontWeight" Value="Bold"/>
-                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                    <Setter Property="BorderBrush" Value="#444"/>
-                </Style>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#007ACC"/>
-                            <Setter Property="Foreground" Value="White"/>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#3E3E42"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.Resources>
-
+        <DataGrid Grid.Row="2" x:Name="dgSinhVien" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                  Background="#2D2D30" RowBackground="#2D2D30" Foreground="#EEE" BorderBrush="#444"
+                  RowHeight="35" SelectionChanged="dgSinhVien_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Mã SV" Binding="{Binding MaSV}" Width="100"/>
-                <DataGridTextColumn Header="Họ và Tên" Binding="{Binding HoTen}" Width="200" FontWeight="Bold"/>
-
-                <DataGridTextColumn Header="Công Việc" Binding="{Binding ViTri}" Width="150"/>
-                <DataGridTextColumn Header="Công Ty" Binding="{Binding CongTy}" Width="150"/>
-                <DataGridTextColumn Header="Ngành" Binding="{Binding Nganh}" Width="180"/>
-
-                <DataGridTextColumn Header="Niên Khóa" Binding="{Binding NienKhoa}" Width="100"/>
-
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200"/>
+                <DataGridTextColumn Header="Mã SV" Binding="{Binding StudentId}" Width="100"/>
+                <DataGridTextColumn Header="Họ Tên" Binding="{Binding FullName}" Width="200" FontWeight="Bold"/>
+                <DataGridTextColumn Header="Ngành" Binding="{Binding MajorName}" Width="150"/>
+                <DataGridTextColumn Header="Năm TN" Binding="{Binding GraduationYear}" Width="80"/>
+                <DataGridTextColumn Header="Công Ty" Binding="{Binding Company}" Width="150"/>
+                <DataGridTextColumn Header="Vị Trí" Binding="{Binding CurrentPosition}" Width="150"/>
+                <DataGridTextColumn Header="Thành Phố" Binding="{Binding City}" Width="120"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <!-- 4. FOOTER -->
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <TextBlock Text="Tổng số bản ghi: " Foreground="#AAA" FontSize="14" VerticalAlignment="Center"/>
-            <TextBlock x:Name="txtTotal" Text="0" Foreground="#4CAF50" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="5,0,0,0"/>
+            <TextBlock Text="Tổng số: " Foreground="#AAA"/>
+            <TextBlock x:Name="txtTotal" Text="0" Foreground="#4CAF50" FontWeight="Bold" Margin="5,0,0,0"/>
         </StackPanel>
     </Grid>
 </UserControl>

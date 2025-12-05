@@ -66,11 +66,6 @@ namespace DoAn_QLCSV
             btnHome.Tag = null;
             var profile = new StudentProfile();
             profile.AllowEditEmail = true;
-            profile.AllowEditPhone = true;
-            profile.AllowEditBirthdate = true;
-            profile.AllowEditAddress = true;
-            profile.AllowEditCompany = true;
-            profile.AllowEditPosition = true;
             MainContent.Content = profile;
         }
 

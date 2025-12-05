@@ -17,14 +17,17 @@
 
         <TextBlock Grid.Row="0" Text="DANH BẠ (Tìm kiếm sinh viên)" FontSize="22" FontWeight="Bold" Foreground="White"/>
 
+        <!-- Search Bar -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-            <!-- simple TextBox (PlaceholderText removed - WPF doesn't support it) -->
             <TextBox x:Name="txtSearch" Width="420" Height="32" VerticalContentAlignment="Center"
                      Background="#2F2F2F" Foreground="White" BorderBrush="#4A4A4A" Padding="8"
                      TextChanged="txtSearch_TextChanged"/>
-            <Button x:Name="btnRefresh" Content="🔄 Làm mới" Margin="8,0,0,0" Padding="10,6" Click="btnRefresh_Click"/>
+
+            <Button x:Name="btnRefresh" Content="🔄 Làm mới" Margin="8,0,0,0" Padding="10,6" Click="btnRefresh_Click"
+                    Background="#1976D2" Foreground="#FFFFFF" BorderThickness="0" Cursor="Hand"/>
         </StackPanel>
 
+        <!-- Results Grid -->
         <Border Grid.Row="4" Background="#262626" CornerRadius="8" Padding="8" BorderBrush="#3E3E3E" BorderThickness="1">
             <Grid>
                 <DataGrid x:Name="dgResults"
@@ -34,14 +37,65 @@
                           IsReadOnly="True"
                           RowHeight="40"
                           HeadersVisibility="Column"
-                          SelectionMode="Single">
+                          SelectionMode="Single"
+                          Background="Transparent"
+                          RowBackground="#2F2F2F"
+                          Foreground="White"
+                          BorderThickness="0"
+                          GridLinesVisibility="Horizontal"
+                          HorizontalGridLinesBrush="#444">
+
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#1E1E1E"/>
+                            <Setter Property="Foreground" Value="#AAA"/>
+                            <Setter Property="Padding" Value="10"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                            <Setter Property="BorderBrush" Value="#444"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Padding" Value="10,0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DataGridCell">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                            <ContentPresenter VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#007ACC"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Họ và Tên" Binding="{Binding Name}" Width="2*" />
-                        <DataGridTextColumn Header="Số Điện Thoại" Binding="{Binding Phone}" Width="160" />
-                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="2*" />
+                        <!-- MSSV -->
+                        <DataGridTextColumn Header="MSSV" Binding="{Binding StudentId}" Width="100" />
+
+                        <!-- Họ Tên -->
+                        <DataGridTextColumn Header="Họ và Tên" Binding="{Binding FullName}" Width="200" FontWeight="Bold" />
+
+                        <!-- Ngành (Mới) -->
+                        <DataGridTextColumn Header="Ngành" Binding="{Binding MajorName}" Width="180" />
+
+                        <!-- Công Ty (Mới) -->
+                        <DataGridTextColumn Header="Công Ty" Binding="{Binding Company}" Width="150" />
+
+                        <!-- Email -->
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
 
+                <!-- Empty State -->
                 <StackPanel x:Name="EmptyState" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock Text="🔍" FontSize="48" Foreground="#666" HorizontalAlignment="Center"/>
                     <TextBlock Text="Không tìm thấy kết quả" FontSize="14" Foreground="#999" HorizontalAlignment="Center" Margin="0,8,0,0"/>

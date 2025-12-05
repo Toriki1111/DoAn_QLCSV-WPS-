@@ -17,30 +17,31 @@ namespace DoAn_QLCSV
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false;
             this.Close();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            // 1. Kiểm tra bắt buộc
-            if (string.IsNullOrEmpty(txtMaSV.Text) || string.IsNullOrEmpty(txtHoTen.Text))
+            if (string.IsNullOrWhiteSpace(txtMaSV.Text) || string.IsNullOrWhiteSpace(txtHoTen.Text))
             {
                 MessageBox.Show("Vui lòng nhập Mã SV và Họ tên!", "Thiếu thông tin", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            // 2. Thu thập dữ liệu (Để sau này gửi API/Lưu DB)
-            // Ví dụ:
-            // var newStudent = new Student() {
-            //     MaSV = txtMaSV.Text,
-            //     HoTen = txtHoTen.Text,
-            //     CongTy = txtCongTy.Text,
-            //     ...
-            // };
+            // TODO: Tạo object DTO và gọi API POST
+            /*
+            var newAlumni = new AlumniDetailResponse {
+                StudentId = txtMaSV.Text,
+                FullName = txtHoTen.Text,
+                FacultyName = txtFaculty.Text,
+                MajorName = txtNganh.Text,
+                // ... map các trường còn lại ...
+            };
+            */
 
-            // 3. Thông báo và Đóng
-            MessageBox.Show("Thêm mới thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-            this.DialogResult = true; // Báo cho cửa sổ cha biết là OK
+            MessageBox.Show("Thêm mới thành công!", "Thông báo");
+            this.DialogResult = true;
             this.Close();
         }
     }

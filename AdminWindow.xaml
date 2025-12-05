@@ -98,7 +98,8 @@
                         <Expander Header="MAIN MENU">
                             <StackPanel Margin="10,0,0,0">
                                 <Button Style="{StaticResource MenuButtonStyle}" Content="👥   Cựu Sinh Viên" Click="btnCuuSV_Click"/>
-                                
+                                <Button Style="{StaticResource MenuButtonStyle}" Content="👥   Phân Quyền User" Click="btnUserRole_Click"/>
+                                <Button Style="{StaticResource MenuButtonStyle}" Content="🎓   Quản lý Khoa/Ngành" Click="btnAcademic_Click"/>
                                 <Button Style="{StaticResource MenuButtonStyle}" Content="📊   Thống Kê" Click="btnThongKe_Click"/>
                                 <Button Style="{StaticResource MenuButtonStyle}" Content="📅   Sự Kiện" Click="btnSuKien_Click"/>
                             </StackPanel>

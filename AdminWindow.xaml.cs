@@ -104,5 +104,14 @@ namespace DoAn_QLCSV
             ChangePasswordWindow changePass = new ChangePasswordWindow();
             changePass.ShowDialog();
         }
+        private void btnUserRole_Click(object sender, RoutedEventArgs e)
+        {
+            LoadView(new UserManagement(), "Phân Quyền Tài Khoản");
+        }
+
+        private void btnAcademic_Click(object sender, RoutedEventArgs e)
+        {
+            LoadView(new AcademicManagement(), "Quản Lý Khoa & Ngành");
+        }
     }
 }
